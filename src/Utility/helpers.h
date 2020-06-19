@@ -49,7 +49,7 @@ extern bool  hasHtrData();
 extern int   getBlueWireStat();
 extern int   getSmartError();
 extern bool  isCyclicStopStartActive();
-extern float getVersion();
+extern float getVersion(bool betarevision = false);
 const char* getVersionStr(bool beta=false);
 extern const char* getVersionDate();
 extern int   getBoardRevision();

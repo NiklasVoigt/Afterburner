@@ -128,6 +128,7 @@ CBluetoothHC05::begin()
     }
 
     DebugPort.print("  Setting baud rate to 9600N81...");
+    //if(!ATCommand("AT+UART=9600,1,0\r\n")) {
     if(!ATCommand("AT+UART=38400,1,0\r\n")) {
       DebugPort.println("FAILED");
     }

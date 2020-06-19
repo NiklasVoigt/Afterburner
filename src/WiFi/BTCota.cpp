@@ -38,7 +38,7 @@ bool CheckFirmwareCRC(int filesize);
 void onSuccess();
 void onWebProgress(size_t progress, size_t total);
 
-esp32FOTA FOTA("afterburner-fota-http", int(getVersion()*1000));
+esp32FOTA FOTA("afterburner-fota-http", int(getVersion()*1000), getVersion(true) != 0 ? true : false);
 unsigned long FOTAtime = millis() + 60000;  // initial check in a minutes time 
 int FOTAauth = 0;
 

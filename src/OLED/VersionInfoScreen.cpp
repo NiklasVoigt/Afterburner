@@ -157,26 +157,22 @@ CVersionInfoScreen::animate()
     // show ascending up arrow if firmware update is available on web server
     _animateCount++;
     WRAPUPPERLIMIT(_animateCount, 3, 0);
-/*    int ypos = 11 + 16 - 7 - _animateCount;
-    _display.fillRect(0, 11, 10, 21, BLACK);
-    _display.drawBitmap(2, ypos, WifiOutIconInfo.pBitmap, WifiOutIconInfo.width, 7, WHITE);    // upload arrow - from web to afterburner
-    _display.fillRect(1, 12, 7, 2, WHITE);   // top bar
-    _drawBitmap(0, 11+17, WWWIconInfo);   // www icon*/
 
     int newVer = isUpdateAvailable();
     if((_animateCount & 0x02) && newVer) {
-      char msg[32];
-      int major = (int)(newVer * 0.01);
-      int minor = newVer - major*100;
-      float prtMajor = major * 0.1;
-      sprintf(msg, "V%.1f.%d", prtMajor, minor);
-      _printMenuText(128, 15, msg, false, eRightJustify);
+      _display.setTextColor(WHITE);
       _drawBitmap(118, 24, UpdateIconInfo);
     }
     else {
-      _display.fillRect(82, 15, 46, 7, BLACK);
+      _display.setTextColor(BLACK);
       _display.fillRect(118, 24, 9, 10, BLACK);
     }
+    char msg[32];
+    int major = (int)(newVer * 0.01);
+    int minor = newVer - major*100;
+    float prtMajor = major * 0.1;
+    sprintf(msg, "V%.1f.%d", prtMajor, minor);
+    _printMenuText(128, 15, msg, false, eRightJustify);
   }
   return true;
 }

@@ -25,10 +25,11 @@ extern void forceBootInit();
 #define USE_QUEUE
 
 
-esp32FOTA::esp32FOTA(String firwmareType, int firwmareVersion)
+esp32FOTA::esp32FOTA(String firwmareType, int firwmareVersion, bool isBeta)
 {
   _firwmareType = firwmareType;
   _firwmareVersion = firwmareVersion;
+  _bIsBeta = isBeta;
   useDeviceID = false;
 //    _endCallback = NULL;
   _queue = xQueueCreate(1, 256);
@@ -254,6 +255,7 @@ esp32FOTA::execHTTPcheck()
         delete[] JSONMessage;
         Serial.println("Parsing failed");
         delay(5000);
+        http.end(); //Free the resources
         return false;
       }
 
@@ -273,23 +275,32 @@ esp32FOTA::execHTTPcheck()
 
       delete[] JSONMessage;
 
-      if (plversion > _firwmareVersion && fwtype == _firwmareType)
-      {
-        _newVersion = plversion;
-        return true;
+      if(fwtype == _firwmareType) {
+        if(_bIsBeta) {   // if beta version being used, check for equal version number
+          if (plversion >= _firwmareVersion) 
+          {
+            _newVersion = plversion;
+            http.end(); //Free the resources
+            return true;
+          }
+        }
+        else {
+          if (plversion > _firwmareVersion)
+          {
+            _newVersion = plversion;
+            http.end(); //Free the resources
+            return true;
+          }
+        }
       }
-      else
-      {
-        _newVersion = 0;
-        return false;
-      }
-      
+      _newVersion = 0;
+
     }
 
     else
     {
       Serial.println("Error on HTTP request");
-      return false;
+      // return false;
     }
 
     http.end(); //Free the resources
@@ -454,16 +465,25 @@ esp32FOTA::decodeResponse(char* resp)
   _bin = plbin;
 
 
-  if (plversion > _firwmareVersion && fwtype == _firwmareType)
-  {
-    _newVersion = plversion;
-    return true;
+  if(fwtype == _firwmareType) {
+    if(_bIsBeta) {   // if beta version being used, check for equal version number
+      if (plversion >= _firwmareVersion) 
+      {
+        _newVersion = plversion;
+        return true;
+      }
+    }
+    else {
+      if (plversion > _firwmareVersion)
+      {
+        _newVersion = plversion;
+        return true;
+      }
+    }
   }
-  else
-  {
-    _newVersion = 0;
-    return false;
-  }
+  _newVersion = 0;
+  return false;
+
 }
 
 void 

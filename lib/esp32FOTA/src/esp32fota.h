@@ -26,7 +26,7 @@ struct sFOTAqueue{
 class esp32FOTA
 {
 public:
-  esp32FOTA(String firwmareType, int firwmareVersion);
+  esp32FOTA(String firwmareType, int firwmareVersion, bool isBeta);
   void execOTA();
   bool execHTTPcheck();
   bool useDeviceID;
@@ -50,6 +50,7 @@ private:
   String _firwmareType;
   int _firwmareVersion;
   int _newVersion;
+  bool _bIsBeta;
   String _checkURL;
   String _host;
   String _bin;

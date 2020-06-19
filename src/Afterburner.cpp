@@ -135,7 +135,7 @@
 const int FirmwareRevision = 40;
 const int FirmwareSubRevision = 0;
 const int FirmwareMinorRevision = 1;
-const char* FirmwareDate = "22 May 2020";
+const char* FirmwareDate = "19 Jun 2020";
 
 /*
  * Macro to check the outputs of TWDT functions and trigger an abort if an
@@ -1203,9 +1203,12 @@ bool getGPIOout(int channel)
 #endif
 }
 
-float getVersion()
+float getVersion(bool betarevision)
 {
-  return float(FirmwareRevision) * 0.1f + float(FirmwareSubRevision) * .001f;
+  if(betarevision)
+    return float(FirmwareMinorRevision);
+  else
+    return float(FirmwareRevision) * 0.1f + float(FirmwareSubRevision) * .001f;
 }
 
 const char* getVersionStr(bool beta) {
@@ -1499,12 +1502,12 @@ void reqHeaterCalUpdate()
 //   return BlueWireData;
 // }
 
-int UHFsubcode(int val)
-{
-  val &= 0x03;
-  val = 0x0001 << val;
-  return val;
-}
+// int UHFsubcode(int val)
+// {
+//   val &= 0x03;
+//   val = 0x0001 << val;
+//   return val;
+// }
 
 void checkUHF()
 {

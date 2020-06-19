@@ -173,7 +173,7 @@ CTxManage::PrepareFrame(const CProtocol& basisFrame, bool isBTCmaster)
 
     float altitude;
     if(getTempSensor().getAltitude(altitude)) {  // if a BME280 is fitted
-      // use calcualted height
+      // use calculated height
       // set 0xeb 0x47 in "unknown bytes" 
       // - 0xeb happens with all pressure quipped units
       // - 0x47 with all other than coffee pod which sends 0x00?
