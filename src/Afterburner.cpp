@@ -227,6 +227,8 @@ bool bHaveWebClient = false;
 bool bBTconnected = false;
 long BootTime;
 
+extern int altitudeTest;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 //               Bluetooth instantiation
 //
@@ -994,6 +996,19 @@ void checkDebugCommands()
         bSendVal = true;
       }
 #endif
+      else if(rxVal == 'a') {
+        switch(altitudeTest) {
+          case 0: altitudeTest = 100; break;
+          case 100: altitudeTest = 4000; break;
+          case 4000: altitudeTest = 10000; break;
+          case 10000: altitudeTest = 20000; break;
+          case 20000: altitudeTest = 0; break;
+        }        
+        if(altitudeTest)
+          DebugPort.printf("Forcing altitude to %d\r\n", altitudeTest);
+        else 
+          DebugPort.println("Normal altitude control");
+      }
       else if(rxVal == 'b') { 
         bReportBlueWireData = !bReportBlueWireData;
         DebugPort.printf("Toggled raw blue wire data reporting %s\r\n", bReportBlueWireData ? "ON" : "OFF");
