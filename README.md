@@ -55,12 +55,12 @@ Working so far:
 * Low voltage cut out, definable threshold - auto adjusts for cable voltage drop during start
 * Temperature probe offset to correct adverse readings.
 * Hour meter - run time, glow time
+* 433MHz Rx stream, 433MHz Tx stream connections. 
+* MQTT pub/sub 
  
 
 To be implemented 
 --------------------------
-* 433MHz Rx stream, 433MHz Tx stream connections. 
-* MQTT pub/sub 
 * Regular Hot Burn cycle (DPF mode!)
 * list under construction.....
 
