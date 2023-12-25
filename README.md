@@ -77,6 +77,10 @@ Likewise, if it's really easy to implement, it may make it to "Working So Far" a
 
 Please be aware that this is not my day job, so "good things take time".
 
+Community
+--------------------------
+Facebook Group: [Afterburner (Advanced Chinese diesel heater controller) users group](https://www.facebook.com/groups/388958075385659)
+
 Case for Green PCB
 --------------------------
 https://www.thingiverse.com/thing:3398068
