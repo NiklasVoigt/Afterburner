@@ -64,6 +64,10 @@ To be implemented
 * Regular Hot Burn cycle (DPF mode!)
 * list under construction.....
 
+Hardware
+--------------------------
+Schematic, Bill of Materials & Gerber Files can be found in wiki
+
 Suggestions
 --------------------------
 If you have a burning desire for a feature that you think will useful, please feel free to drop me a line at gitlab@mrjones.id.au.  
